@@ -26,6 +26,11 @@ app.get('/health', (_req, res) => {
 // Swagger docs
 app.use('/api/docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
+// The API has no landing page: send visitors of the bare domain to the docs
+app.get('/', (_req, res) => {
+  res.redirect('/api/docs/');
+});
+
 app.use('/auth', authRoutes);
 app.use('/urls', urlRoutes);
 app.use('/urls', analyticsRoutes);
